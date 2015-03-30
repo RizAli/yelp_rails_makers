@@ -9,7 +9,7 @@ feature 'restaurants' do
     end
   end
 
-  context 'restraunts have been added' do
+  context 'restaurants have been added' do
     before do
       Restaurant.create(name: 'KFC')
     end
