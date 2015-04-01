@@ -1,0 +1,122 @@
+basecamp
+zendesk
+Active record
+
+bin/rake db:drop db:create db:migrate
+bin/rake db:migrate (runs all the
+
+bin/rake routes
+
+form_for is rails built-in helper to build a form
+
+spring (check ones completed rails tutorial)
+
+
+
+shoulda gem
+
+
+rspec - error
+uninitialised constant
+
+this indicates that we need a restaurant model
+$bin/rails g model restaurant name:string rating:integer
+
+
+
+rspec - error
+uninitialised constant RestaurantController
+bin/rails g controller restaurants
+rspec - error
+
+The action 'index' could not be found for RestaurantsController
+
+this indicates that need to add an index method in our controller.
+def index
+  raise “Hello for the index action”
+  @restaurants = Restaurant.all
+end
+AbstractController::ActionNotFound:
+
+The action ‘new’ could not be found for RestaurantsController
+
+this indicates that we should make new method in restaurants_controller.rb to go alongside our index method.
+
+class RestaurantsController < ApplicationController
+def new
+end
+
+
+rspec -error
+
+Missing template restaurant/index
+
+touch app/view/restaurants/index.html.haml
+
+and then add text to it -     No restaurants yet!
+
+
+
+ActionView::MissingTemplate:
+this means our new method does’t have a view associated with it.
+touch app/views/restaurants/new.html.haml
+
+Failure/Error: fill_in ‘Name, with: ‘KFC’
+Capybara:ElementNotFound:
+Unable to find field “Name”
+
+We are currently missing anything on that page to allow a user to submit restaurant details
+
+
+Failure/Error: click_button 'Create Restaurant'
+AbstractController::ActionNotFound:
+The action ‘create’ could not be found for RestaurantsController
+
+We need a create method!
+
+Class RestaurantsController < ApplicationController
+def create
+  Restaurant.create(params[:restaurant])
+  redirect_to ‘/restaurants'
+end
+
+Failure/Error: click_button 'Create Restaurant'
+ActiveModel::ForbiddenAttributesError:
+ActiveModel::ForbiddenAttributesError
+We need to explicitly state which params we are going to allow our controller to accept, using permit.
+lets create a utility method that does this for us and add it to our controller.
+
+def restaurant_params
+  params.require(:restaurant).permit(:name)
+end
+
+Restaurant.create( params [:restaurant] )
+instead say
+Restaurant.create(restaurant_params)
+
+this tells rails that we should allow only the field labelled ‘name’ to be accepted by the form.
+
+
+Adding a description column
+in rails adding columns are made by creating migration
+bin/rails g migration
+
+$ bin/rails g migration AddDescriptionToRestaurants description:text
+$ bin/rake db:migrate
+
+
+Facebook
+Valid OAuth redirect URIs
+settings OAuth
+http://localhost:3000/
+
+After creating new app on Facebook Developer application
+on Dashboard:
+App ID and App Secret:
+In git ignore file added
+config/secrets.yml
+
+➜  git rm ./config/secrets.yml
+
+git add  - - all
+git status
