@@ -24,9 +24,7 @@ Rails.application.routes.draw do
     resources :reviews
   end
 
-  devise_scope :user do
-    get 'sign_out', :to => 'devise/sessions#destroy', :as => :destroy_user_session
-  end
+
 
 
   # Example resource route with options:

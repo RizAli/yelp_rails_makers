@@ -36,6 +36,14 @@ context "user signed in on the homepage" do
     expect(page).not_to have_link('Sign in')
     expect(page).not_to have_link('Sign up')
   end
+
+  xit 'should be able to create a restaurant only when the user is logged in' do
+
+    visit('/')
+  end
+
+
+
 end
 
 
